@@ -17,7 +17,7 @@ class MainDashboard:
 
     def create_widgets(self):
         # banner
-        banner_label = tk.Label(root, text="Finance Dashboard", bg="green", fg="white", font=("Arial", 16))
+        banner_label = tk.Label(root, text="Finance Dashboard Sign-On", bg="green", fg="white", font=("Arial", 16))
         banner_label.grid(row=0, column=0, columnspan=2, sticky="ew")  # Span two columns and expand horizontally
 
         # Connect to Database button
@@ -25,7 +25,7 @@ class MainDashboard:
         connect_button.grid(row=2, column=0, columnspan=2, pady=(10, 0))  # Span two columns and add padding to the top
 
         # Show Balance button (initially disabled)
-        self.balance_button = tk.Button(self.root, text="Show Balance", command=self.show_balance_window, state="disabled")
+        self.balance_button = tk.Button(self.root, text="Show Balance", command=self.show_balance_window, state="normal")
         self.balance_button.grid(row=3, column=0, columnspan=2, pady=10)
 
         # Withdraw Money entry and button (initially disabled)
@@ -36,7 +36,7 @@ class MainDashboard:
         self.withdraw_amount_entry.grid(row=5, column=1, pady=5, padx=5, sticky="e")  # Entry on the right
 
         # Deposit Money entry and button (initially disabled)
-        self.deposit_button = tk.Button(self.root, text="Deposit Money", command=self.deposit_money, state="disabled")
+        self.deposit_button = tk.Button(self.root, text="Deposit Money", command=self.deposit_money, state="normal")
         self.deposit_amount_entry = tk.Entry(self.root)
 
         self.deposit_button.grid(row=4, column=0, pady=5, padx=5, sticky="e")
@@ -73,7 +73,7 @@ class MainDashboard:
 
         if withdrawal_amount > 0:
             if self.balance >= withdrawal_amount:
-                self.balance -= withdrawal_amount
+                self.balance += withdrawal_amount
                 messagebox.showinfo("Withdrawal", f"Withdrew ${withdrawal_amount}")
             else:
                 messagebox.showerror("Withdrawal Error", "Insufficient balance")
@@ -89,7 +89,7 @@ class MainDashboard:
             return
 
         if deposit_amount > 0:
-            self.balance += deposit_amount
+            self.balance -= deposit_amount
             messagebox.showinfo("Deposit", f"Deposited ${deposit_amount}")
         else:
             messagebox.showerror("Deposit Error", "Invalid deposit amount")
